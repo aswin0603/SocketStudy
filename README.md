@@ -4,42 +4,39 @@
 To perform a study on Socket Programming
 ## Introduction:
 
-Socket programming is a crucial aspect of network communication, allowing for data exchange between computers over a network. It forms the backbone of various networked applications, enabling communication between clients and servers. This study explores the fundamental concepts of socket programming, its use cases, and provides a practical example to demonstrate its implementation.
-
+ 	Socket programming is a crucial aspect of network communication, allowing for data exchange between computers over a network. It forms the backbone of various networked applications, enabling communication between clients and servers. This study explores the fundamental concepts of socket programming, its use cases, and provides a practical example to demonstrate its implementation.
 ## Understanding Socket Programming:
-Socket programming involves the use of sockets, which serve as endpoints for communication. A socket is identified by an IP address and a port number, and it facilitates data transfer between a client and a server. The two main types of sockets are Stream Sockets, which provide a reliable, connection-oriented communication, and Datagram Sockets, which are connectionless and suitable for scenarios where reliability is less critical.
-
+	Socket programming involves the use of sockets, which serve as endpoints for communication. A socket is identified by an IP address and a port number, and it facilitates data transfer between a client and a server. The two main types of sockets are Stream Sockets, which provide a reliable, connection-oriented communication, and Datagram Sockets, which are connectionless and suitable for scenarios where reliability is less critical.
 ## Key Concepts in Socket Programming:
-1. Sockets
-   
+1.Sockets
 •	A socket is a software representation of a communication endpoint in a network.
 •	It is identified by an IP address and a port number.
 •	Sockets can be classified into two main types: Stream Sockets and Datagram Sockets.
 •	Stream Sockets provide a reliable, connection-oriented communication, while Datagram Sockets are connectionless and operate in a best-effort mode.
 
-
-3. Client-Server Model
+2. Client-Server Model
 
 •	Socket programming typically follows the client-server model.
 •	The server listens for incoming connections from clients, while clients initiate connections to the server.
 •	Servers are passive, waiting for connection requests, and clients are active, initiating communication.
 
-3.  TCP/IP Protocol:
+3, TCP/IP Protocol:
 
 •	Transmission Control Protocol (TCP) and Internet Protocol (IP) are the foundational protocols for socket programming.
 •	TCP provides reliable, connection-oriented communication, ensuring data integrity and order.
 •	IP facilitates the routing of data between devices in a network.
 
-4. Basic Socket Functions:
+4.Basic Socket Functions:
 
 •	Socket programming involves a set of functions provided by the operating system or programming language to create, bind, listen, accept, connect, send, and receive data through sockets.
 •	Examples of functions include socket(), bind(), listen(), accept(), connect(), send(), and recv().
 
 ## Server-Side Operations:
 
-•	Servers create a socket using socket() and bind it to a specific IP address and port using bind(). \
-•	They then listen for incoming connections with listen() and accept connections with accept(). \
-•	Once a connection is established, servers can send and receive data using send() and recv().
+•	Servers create a socket using socket() and bind it to a specific IP address and port using bind().
+•	They then listen for incoming connections with listen() and accept connections with accept().
+•	Once a connection is establi
+•	shed, servers can send and receive data using send() and recv().
 
 ## Client –Server Operations
 
@@ -56,20 +53,38 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
-## Commands:
+## Client:
+
+```python
+import socket
+from datetime import datetime
+s=socket.socket()
+s.bind(('localhost',8000))
+s.listen(5)
+c,addr=s.accept()
+print("Client Address : ",addr)
+now = datetime.now()
+c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+ack=c.recv(1024).decode()
+if ack:
+    print(ack)
+    c.close()
 ```
-socket.socket() – Creates a new socket for network communication.
-bind() – Assigns an IP address and port number to a socket.
-listen() – Makes a server socket wait for incoming connections.
-accept() – Accepts an incoming client connection.
-connect() – Connects a client socket to a server.
-send() – Sends data through a connected socket.
-recv() – Receives data from a connected socket.
-sendto() – Sends data to a specific address, commonly used with UDP.
-recvfrom() – Receives data and the sender's address, commonly used with UDP.
-close() – Closes the socket and ends the network connection.
+## Server:
+
+```python
+import socket
+s=socket.socket()
+s.connect(('localhost',8000))
+print(s.getsockname())
+print(s.recv(1024).decode())
+s.send("acknowledgement recived from the server".encode())
 ```
 
+
+## Output:
+
+<img width="1860" height="958" alt="image" src="https://github.com/user-attachments/assets/299fe0b3-4b5a-45db-bc44-96700a06539b" />
 
 
 ## Result:
