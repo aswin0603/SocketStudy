@@ -53,38 +53,25 @@ Socket programming finds applications in various domains, including web developm
 4.	Networked Games: Online multiplayer games rely on socket programming to facilitate communication between game clients and servers.
 5.	RPC mechanisms: which allow processes to execute code on a remote server, often use socket programming for communication.
 
-## Client:
 
-```python
-import socket
-from datetime import datetime
-s=socket.socket()
-s.bind(('localhost',8000))
-s.listen(5)
-c,addr=s.accept()
-print("Client Address : ",addr)
-now = datetime.now()
-c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
-ack=c.recv(1024).decode()
-if ack:
-    print(ack)
-    c.close()
-```
-## Server:
-
-```python
-import socket
-s=socket.socket()
-s.connect(('localhost',8000))
-print(s.getsockname())
-print(s.recv(1024).decode())
-s.send("acknowledgement recived from the server".encode())
-```
-
-
-## Output:
-
-<img width="1860" height="958" alt="image" src="https://github.com/user-attachments/assets/299fe0b3-4b5a-45db-bc44-96700a06539b" />
+## Study:
+| Function               | Purpose                                            |
+| ---------------------- | -------------------------------------------------- |
+| `socket.socket()`      | Creates a new socket.                              |
+| `socket.bind()`        | Assigns an IP address and port to the socket.      |
+| `socket.listen()`      | Makes the server wait for incoming connections.    |
+| `socket.accept()`      | Accepts a client connection.                       |
+| `socket.connect()`     | Connects a client socket to a server.              |
+| `socket.send()`        | Sends data through the socket.                     |
+| `socket.sendall()`     | Sends all given data reliably.                     |
+| `socket.recv()`        | Receives data from the socket.                     |
+| `socket.close()`       | Closes the socket connection.                      |
+| `socket.settimeout()`  | Sets a maximum waiting time for socket operations. |
+| `socket.getsockname()` | Gets the socket's own IP address and port.         |
+| `socket.getpeername()` | Gets the connected peer's IP address and port.     |
+| `socket.shutdown()`    | Stops sending or receiving data on the socket.     |
+| `socket.makefile()`    | Creates a file-like object from the socket.        |
+| `socket.gethostname()` | Returns the computer's host name.                  |
 
 
 ## Result:
